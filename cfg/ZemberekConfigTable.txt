@@ -1,0 +1,51 @@
+1) Number-Person agreement
+	FirstPerson Singular A1sg	
+	SecondPerson Singular A2sg	
+	ThirdPerson Singular  A3sg
+	FirstPerson Plural A1pl	
+	SecondPerson Plural A2pl	
+	ThirdPerson Plural A3pl
+	
+2) Possesive
+	Firstperson Singular P1sg 	=> 	elma-m
+	Secondperson Singular P2sg	=> 	elma-si
+	ThirdPerson Singular P3sg	=> 	emas-si
+	FirstPerson Plural	P1pl	
+	SecondPerson Plural	P2pl
+	ThirdPerson Plural	P3pl
+	
+3) Case suffixes
+	Nominal			Nom		elma
+	Dative			Dat		elma-ya
+	Accusative		Acc		elma-yi
+	Ablative		Abl		elma-dan
+	Locative		Loc		elma-da 
+	Instrumental	Ins		elma-yla
+	Genitive		Gen		elma-nin
+	Equ				Equ		elmaca	
+	
+4) Derivation suffixes
+	Diminutive		Dim			elma-cik
+	Ness			Ness		elma-lik
+	With			With 		elma-li 
+	Without			Without 	elma-siz
+	Related			Related		elma-sal	
+	JustLike		JustLike	tahta-msi	
+	Relation		Rel			tahta-daki	
+	Agentive		Agt			elma-ci 	
+	Become			Become 		tahta-las	
+	Acquire			Acquire 	tahta-lan	
+	
+5) Tense
+	Present			Pres		
+	Past			Past
+	Narrative		Narr
+	Condition		Cond
+	Progressive1	Prog1 		oku-yor	
+	Progressive2	Prog2		oku-makta 
+	Aorist			Aor			oku-r 
+	Future			Fut			oku-yacak 
+	Imparative 		Imp			gel-sin 
+	Optative		Opt			oku-ya 
+	Desire			Desr		oku-sa 
+	Necessity		Neces		oku-mali 

@@ -1,5 +1,6 @@
 package main;
 import java.io.BufferedReader;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.File;
@@ -18,17 +19,13 @@ import zemberek.morphology.lexicon.DictionaryItem;
 import zemberek.morphology.lexicon.RootLexicon;
 
 public class Main {
-	
-	
-	private static final String DEFAULT_LEXICON_PATH = "C:\\Users\\ebu\\Desktop\\Lexicon\\words.txt";
-	
-
-	
-	private static RootLexicon lexicon;
-	private static TurkishMorphology morphology;
 
 
 	public static void main(String[] args) throws IOException {
+		Utils.readParams();
+		for(String str : Utils.number) {
+			System.out.println(str);
+		}
 		List<String> words = Utils.readWords();
 		WordGenerator wordGenerator = new WordGenerator(null);
 		for(int j=0;j<words.size();j++) {
@@ -37,6 +34,7 @@ public class Main {
 				wordGenerator.generateWords(i+1);
 			}
 		}
+		
 		
 	}
 	

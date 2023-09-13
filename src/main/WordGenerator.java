@@ -13,9 +13,6 @@ import zemberek.morphology.lexicon.RootLexicon;
 public class WordGenerator {
 	
 	
-
-	public static final String DEFAULT_LEXICON_PATH = "C:\\Users\\ebu\\Desktop\\Lexicon\\words.txt";
-
 	private RootLexicon lexicon;
 	private TurkishMorphology morphology;
 	private DictionaryItem item;
@@ -28,7 +25,7 @@ public class WordGenerator {
 		try {
 			lexicon = RootLexicon.builder()
 				      .setLexicon(RootLexicon.getDefault()) // start with default
-				      .addTextDictionaries(Paths.get(DEFAULT_LEXICON_PATH)) // add from file
+				      .addTextDictionaries(Paths.get(Path.DEFAULT_LEXICON_PATH)) // add from file
 				      .build();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -41,10 +38,12 @@ public class WordGenerator {
 				    .build();
 		if(word != null)
 			setItem(word);
+		//Load the config file
+		Utils.readParams();
 	}
 	
 	public WordGenerator(String word) {
-		this(word,DEFAULT_LEXICON_PATH);
+		this(word,Path.DEFAULT_LEXICON_PATH);
 	}
 	
 	public void setItem(String word) {

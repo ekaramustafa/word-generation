@@ -1,0 +1,7 @@
+{
+	"number" : ["A3sg","A3pl"],
+	"possessives" : ["P1sg","P2sg","P3sg","P1pl","P2pl","P3pl"],
+	"cases" : ["Nom","Loc","Dat","Abl","Ins","Gen"],
+	"derivationSuffixes" : ["With","Without","Rel"],
+	"tenses" : ["Past","Narr","Cond","Desr"]
+}

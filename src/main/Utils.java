@@ -1,7 +1,13 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,18 +19,21 @@ import java.io.Writer;
 import zemberek.morphology.generator.WordGenerator.Result;
 
 public class Utils {
-	private static final String[] number = {"A3sg","A3pl"};
 
-	private static final String[] possessives = {"P1sg","P2sg","P3sg","P1pl","P2pl","P3pl"};
+	//	private static String[] full_number = {"A1sg","A2sg","A3sg","A1pl","A2pl","A3pl"};
+	public static String[] number = {"A3sg","A3pl"};
 	
-//	private static final String[] cases = {"Nom","Loc","Dat","Abl","Ins","Gen","Equ"};
-	private static final String[] cases = {"Nom","Loc","Dat","Abl","Ins","Gen"};
+//	private static String[] full_possessives = {"P1sg","P2sg","P3sg","P1pl","P2pl","P3pl"};
+	private static String[] possessives = {"P1sg","P2sg","P3sg","P1pl","P2pl","P3pl"};
 	
-//	private static final String[] derivationSuffixes = {"Dim","Ness","With","Without","Related","JustLike","Rel","Agt","Become","Acquire"};
-	private static final String[] derivationSuffixes = {"With","Without","Rel"};
+//	private static final String[] full_cases = {"Nom","Loc","Dat","Abl","Ins","Gen","Equ"};
+	private static String[] cases = {"Nom","Loc","Dat","Abl","Ins","Gen"};
 	
-//	private static final String[] tenses = {"Past","Narr","Cond","Prog1","Prog2","Aor","Fut","Imp","Opt","Desr","Neces","Pres"};
-	private static final String[] tenses = {"Past","Narr","Cond","Desr"};
+//	private static final String[] full_derivationSuffixes = {"Dim","Ness","With","Without","Related","JustLike","Rel","Agt","Become","Acquire"};
+	private static String[] derivationSuffixes = {"With","Without","Rel"};
+	
+//	private static final String[] full_tenses = {"Past","Narr","Cond","Prog1","Prog2","Aor","Fut","Imp","Opt","Desr","Neces","Pres"};
+	private static String[] tenses = {"Past","Narr","Cond","Desr"};
 	
 	
 	public static String resultString(List<Result> results, String ...parameters) {
@@ -108,7 +117,7 @@ public class Utils {
 
         try {
             // Create a FileReader to read the file
-            FileReader fileReader = new FileReader(WordGenerator.DEFAULT_LEXICON_PATH);
+            FileReader fileReader = new FileReader(Path.DEFAULT_LEXICON_PATH);
 
             // Create a BufferedReader to efficiently read the file line by line
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -129,6 +138,50 @@ public class Utils {
     
 
         return result;
+	}
+	
+	//reading from the config file
+	public static HashMap<String,List<String>> readParams(){
+		HashMap<String,List<String>> map = new HashMap<>();
+		try {
+            Gson gson = new Gson();
+            FileReader reader = new FileReader(Path.DEFAULT_CONFIG_PATH); // Replace with the path to your JSON file
+
+            // Use JsonParser to parse the JSON data
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = jsonParser.parse(reader).getAsJsonObject();
+
+            // Deserialize JSON data into a Java object
+            JsonConfig json = gson.fromJson(jsonObject, JsonConfig.class);
+            map.put("number", json.getNumber());
+            map.put("possessives", json.getPossessives());
+            map.put("cases", json.getCases());
+            map.put("derivationSuffixes", json.getDerivationSuffixes());
+            map.put("tenses", json.getTenses());
+
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		String[] newNumber = new String[map.get("number").size()];
+		String[] newPoss = new String[map.get("possessives").size()];
+		String[] newCase = new String[map.get("cases").size()];
+		String[] newDerivation = new String[map.get("derivationSuffixes").size()];
+		String[] newTenses = new String[map.get("tenses").size()];
+		map.get("number").toArray(newNumber);
+		map.get("possessives").toArray(newPoss);
+		map.get("cases").toArray(newCase);
+		map.get("derivationSuffixes").toArray(newDerivation);
+		map.get("tenses").toArray(newTenses);
+		
+		number = newNumber;
+		possessives = newPoss;
+		cases = newCase;
+		derivationSuffixes = newDerivation;
+		tenses = newTenses;
+		
+		return map;
+		
 	}
 	
 
