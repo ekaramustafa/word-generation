@@ -70,10 +70,29 @@ public class WordGenerator {
 				break;
 			default:
 				System.err.println("ERROR : Please enter valid numberOfSuffixes" );
-				System.out.println("Possible number of suffixes is from 1 to " + String.valueOf(possibleNumberOfSuffixes()));
+				System.out.println("Possible number of suffixes is from 1 to " + String.valueOf(JsonConfig.maxNumberOfSuffixes));
 		}
 	
 
+		
+	}
+	private void analyze(String result, Methods method,List<String> wrongP,List<String> ...correctP) {
+		if(result.length() == 0)return;
+		System.out.println("==========START========");
+		System.out.println("For generating w/ " + method.toString());
+
+		System.out.println(result);
+		Utils.writeToTxt(result,item.root,numberOfSuffixes);
+		System.out.println();
+		//System.out.println("Wrong Permutations : " + wrongP);
+		for(List<String> list : correctP) {
+			System.out.println(list);
+			
+		}
+		
+		System.out.println("==========END=========");
+		System.out.println();
+		
 		
 	}
 	
@@ -210,25 +229,7 @@ public class WordGenerator {
 	}
 	
 	
-	private void analyze(String result, Methods method,List<String> wrongP,List<String> ...correctP) {
-		if(result.length() == 0)return;
-		System.out.println("==========START========");
-		System.out.println("For generating w/ " + method.toString());
 
-		System.out.println(result);
-		Utils.writeToTxt(result,item.root,numberOfSuffixes);
-		System.out.println();
-		//System.out.println("Wrong Permutations : " + wrongP);
-		for(List<String> list : correctP) {
-			System.out.println(list);
-			
-		}
-		
-		System.out.println("==========END=========");
-		System.out.println();
-		
-		
-	}
 
 	
 	private String calculateFirstPossibilities(String[] list, List<String> ...lists) {
@@ -439,9 +440,6 @@ public class WordGenerator {
 		this.item = item;
 	}
 	
-	public int possibleNumberOfSuffixes() {
-		return 4;
-	}
 
 
 }

@@ -3,6 +3,9 @@ package main;
 import java.util.List;
 
 public class JsonConfig {
+		//a word can take 4 suffixes at max = number of keys in the config json
+		public static final int maxNumberOfSuffixes = 4;
+		
 	   private List<String> number;
 	    private List<String> possessives;
 	    private List<String> cases;

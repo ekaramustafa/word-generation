@@ -14,32 +14,34 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.Writer;
 
 import zemberek.morphology.generator.WordGenerator.Result;
 
 public class Utils {
 
-	//	private static String[] full_number = {"A1sg","A2sg","A3sg","A1pl","A2pl","A3pl"};
+	private static String[] full_number = {"A1sg","A2sg","A3sg","A1pl","A2pl","A3pl"};
 	public static String[] number = {"A3sg","A3pl"};
 	
-//	private static String[] full_possessives = {"P1sg","P2sg","P3sg","P1pl","P2pl","P3pl"};
+	private static String[] full_possessives = {"P1sg","P2sg","P3sg","P1pl","P2pl","P3pl"};
 	private static String[] possessives = {"P1sg","P2sg","P3sg","P1pl","P2pl","P3pl"};
 	
-//	private static final String[] full_cases = {"Nom","Loc","Dat","Abl","Ins","Gen","Equ"};
+	private static final String[] full_cases = {"Nom","Loc","Dat","Abl","Ins","Gen","Equ"};
 	private static String[] cases = {"Nom","Loc","Dat","Abl","Ins","Gen"};
 	
-//	private static final String[] full_derivationSuffixes = {"Dim","Ness","With","Without","Related","JustLike","Rel","Agt","Become","Acquire"};
+	private static final String[] full_derivationSuffixes = {"Dim","Ness","With","Without","Related","JustLike","Rel","Agt","Become","Acquire"};
 	private static String[] derivationSuffixes = {"With","Without","Rel"};
 	
-//	private static final String[] full_tenses = {"Past","Narr","Cond","Prog1","Prog2","Aor","Fut","Imp","Opt","Desr","Neces","Pres"};
+	private static final String[] full_tenses = {"Past","Narr","Cond","Prog1","Prog2","Aor","Fut","Imp","Opt","Desr","Neces","Pres"};
 	private static String[] tenses = {"Past","Narr","Cond","Desr"};
 	
 	
 	public static String resultString(List<Result> results, String ...parameters) {
 		StringBuilder resultStr = new StringBuilder(generatePermutation(parameters));
-	    results.forEach(s->resultStr.append(s.surface).append(" "));
-	    resultStr.append("\n");
+		resultStr.append(results.get(0).surface).append("\n");
+	    //results.forEach(s->resultStr.append(s.surface).append(" "));
+	   // resultStr.append("\n");
 	    return resultStr.toString();
 	}
 	
@@ -72,8 +74,7 @@ public class Utils {
 		return null;
 	}
 	
-	private static void writeToTxt(String text,String filepath) {
-		
+	private static void write(String text,String filepath) {
 		try{
 			File file = new File(filepath);
             File parentDir = file.getParentFile();
@@ -107,8 +108,24 @@ public class Utils {
 	public static void writeToTxt(String text,String word, int numberOfSuffixes) {
 		String filename = word + "_" + String.valueOf(numberOfSuffixes) + ".txt";
         String filepath = "words\\"+word +"\\" + filename; // Specify the name of the file you want to create/write to.
-        writeToTxt(text,filepath);
-        
+        String filepathWithoutDescription = "words\\" + word + "\\WD\\" + filename.replace(".txt", "WD.txt");
+        write(text,filepath);
+		writeWithoutDescription(text,filepathWithoutDescription);
+	}
+	
+	private static void writeWithoutDescription(String text, String filepath) {
+		StringBuilder result = new StringBuilder();
+		try (BufferedReader reader = new BufferedReader(new StringReader(text))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+            	String[] parts = line.split("=");
+            	result.append(parts[1].strip()).append("\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		write(result.toString(),filepath);
+		
 	}
 	
 	public static List<String> readWords(){

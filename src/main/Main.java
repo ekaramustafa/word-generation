@@ -22,15 +22,12 @@ public class Main {
 
 
 	public static void main(String[] args) throws IOException {
-		Utils.readParams();
-		for(String str : Utils.number) {
-			System.out.println(str);
-		}
+
 		List<String> words = Utils.readWords();
 		WordGenerator wordGenerator = new WordGenerator(null);
 		for(int j=0;j<words.size();j++) {
 			wordGenerator.setItem(words.get(j));
-			for(int i =0;i<wordGenerator.possibleNumberOfSuffixes();i++) {
+			for(int i =0;i<JsonConfig.maxNumberOfSuffixes;i++) {
 				wordGenerator.generateWords(i+1);
 			}
 		}
